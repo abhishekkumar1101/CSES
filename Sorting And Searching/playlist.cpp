@@ -40,14 +40,25 @@ void solve(){
  int n;
 cin>>n;
 int arr[n];
-ll int sfsum = 0;
-for(int i =0;i<n;i++) cin>>arr[i],sfsum+=arr[i];
-sort(arr,arr+n);
-ll int pfsum = 0,ans = 1e18;
-for(int i = 0;i<n;i++){
-    sfsum-=arr[i];
-    ans = min(ans,1LL*(arr[i]*1LL*i-pfsum)+1LL*(sfsum-arr[i]*1LL*(n-i-1)));
-    pfsum+=arr[i];
+for(int i =0;i<n;i++) cin>>arr[i];
+map<int,int> mp;
+int i = 0,j=0,ans=0;
+while(j<n){
+    if(mp.find(arr[j])==mp.end()) mp[arr[j]]++;
+    else{
+        while(i<=j){
+            mp.erase(arr[i]);
+            if(arr[i]==arr[j]) {
+                i++;
+                break;
+            }
+            i++;
+        }
+        mp[arr[j]]++;
+    }
+    ans=max(ans,j-i+1);
+    //cout<<i<<" "<<j<<" "<<ans<<"\n";
+    j++;
 }
 cout<<ans<<"\n";
 }
@@ -58,7 +69,6 @@ ios_base::sync_with_stdio(0);
 cin.tie(0);
 cout.tie(0);
 int t=1;
-
 while (t--){
 solve();
 }

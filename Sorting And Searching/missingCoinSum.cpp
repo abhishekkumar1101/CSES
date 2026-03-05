@@ -40,16 +40,14 @@ void solve(){
  int n;
 cin>>n;
 int arr[n];
-ll int sfsum = 0;
-for(int i =0;i<n;i++) cin>>arr[i],sfsum+=arr[i];
+for(int i =0;i<n;i++) cin>>arr[i];
+ll int sum = 0;
 sort(arr,arr+n);
-ll int pfsum = 0,ans = 1e18;
 for(int i = 0;i<n;i++){
-    sfsum-=arr[i];
-    ans = min(ans,1LL*(arr[i]*1LL*i-pfsum)+1LL*(sfsum-arr[i]*1LL*(n-i-1)));
-    pfsum+=arr[i];
+    if(arr[i]>sum+1) break;
+    sum+=arr[i];
 }
-cout<<ans<<"\n";
+cout<<sum+1<<"\n";
 }
  
  

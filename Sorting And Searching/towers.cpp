@@ -39,17 +39,17 @@ return pnum;
 void solve(){
  int n;
 cin>>n;
-int arr[n];
-ll int sfsum = 0;
-for(int i =0;i<n;i++) cin>>arr[i],sfsum+=arr[i];
-sort(arr,arr+n);
-ll int pfsum = 0,ans = 1e18;
-for(int i = 0;i<n;i++){
-    sfsum-=arr[i];
-    ans = min(ans,1LL*(arr[i]*1LL*i-pfsum)+1LL*(sfsum-arr[i]*1LL*(n-i-1)));
-    pfsum+=arr[i];
+vector<int> arr(n);
+for(int i =0;i<n;i++) cin>>arr[i];
+vector<int> v;
+v.pb(arr[0]);
+for(int i = 1;i<n;i++){
+    auto it = upper_bound(v.begin(),v.end(),arr[i]);
+    if(it==v.end()) v.pb(arr[i]);
+    else v[it-v.begin()] = arr[i];
+    //cout<<it-v.begin()<<" ";
 }
-cout<<ans<<"\n";
+cout<<v.size();
 }
  
  
@@ -58,7 +58,6 @@ ios_base::sync_with_stdio(0);
 cin.tie(0);
 cout.tie(0);
 int t=1;
-
 while (t--){
 solve();
 }
